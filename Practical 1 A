@@ -1,0 +1,50 @@
+class Student {
+    int rollNo;
+    String name;
+
+    Student() {
+        rollNo = 123;
+        name = "Dhruv Yadav";
+    }
+
+    Student(int r, String n) {
+        rollNo = r;
+        name = n;
+    }
+
+    void display() {
+        System.out.println("Roll No: " + rollNo);
+        System.out.println("Name: " + name);
+    }
+
+    void add(int a, int b) {
+        System.out.println("Sum of two numbers = " + (a + b));
+    }
+
+    void add(int a, int b, int c) {
+        System.out.println("Sum of three numbers = " + (a + b + c));
+    }
+
+    static void collegeName() {
+        System.out.println("College Name: MVLU College");
+    }
+}
+
+public class JavaPractical1 {
+    public static void main(String[] args) {
+
+        Student.collegeName();
+
+        System.out.println("\nDefault Constructor:");
+        Student s1 = new Student();
+        s1.display();
+
+        System.out.println("\nParameterized Constructor:");
+        Student s2 = new Student(101, "Dhruv");
+        s2.display();
+
+        System.out.println("\nMethod Overloading:");
+        s2.add(10, 20);
+        s2.add(10, 20, 30);
+    }
+}
