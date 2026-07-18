@@ -1,0 +1,36 @@
+class InvalidMarksException extends Exception {
+    public InvalidMarksException(String message) {
+        super(message);
+    }
+}
+
+class Student {
+    public void checkMarks(int marks) throws InvalidMarksException {
+
+        if (marks < 0) {
+            throw new InvalidMarksException("Marks cannot be negative.");
+        } else if (marks > 100) {
+            throw new InvalidMarksException("Marks cannot be greater than 100.");
+        } else if (marks < 35) {
+            throw new InvalidMarksException("Student has failed.");
+        } else {
+            System.out.println("Student has passed with " + marks + " marks.");
+        }
+    }
+}
+
+public class Practical3c {
+    public static void main(String[] args) {
+
+        Student student = new Student();
+
+        try {
+            student.checkMarks(75);   
+            student.checkMarks(-10);  
+            student.checkMarks(120);  
+            student.checkMarks(30);   
+        } catch (InvalidMarksException e) {
+            System.out.println("Custom Exception Caught: " + e.getMessage());
+        }
+    }
+}
