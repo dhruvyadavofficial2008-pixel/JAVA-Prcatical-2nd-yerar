@@ -1,0 +1,26 @@
+class Person {
+
+    void display() {
+        System.out.println("This is a Person.");
+    }
+}
+
+class Teacher extends Person {
+
+    @Override
+    void display() {
+        System.out.println("This is a Teacher.");
+    }
+}
+
+public class Practical1b {
+
+    public static void main(String[] args) {
+
+        Person p = new Person();
+        p.display();
+
+        Teacher t = new Teacher();
+        t.display();
+    }
+}
