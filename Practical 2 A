@@ -1,0 +1,25 @@
+abstract class Shape {
+
+
+    void message() {
+        System.out.println("This is a Shape class.");
+    }
+}
+
+class Circle extends Shape {
+
+    void draw() {
+        System.out.println("Drawing a Circle");
+    }
+}
+
+public class Practical2a {
+
+    public static void main(String[] args) {
+
+        Circle c = new Circle();
+
+        c.message();   
+        c.draw();      
+    }
+}
