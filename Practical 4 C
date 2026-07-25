@@ -1,0 +1,35 @@
+import java.util.HashMap;
+import java.util.Map;
+
+public class pra4c {
+    public static void main(String[] args) {
+
+        System.out.println("--- Demonstrating Map Interface ---");
+
+        Map<String, Integer> carPrices = new HashMap<>();
+
+        carPrices.put("Toyota", 1500000);
+        carPrices.put("Honda", 1800000);
+        carPrices.put("BMW", 5500000);
+        carPrices.put("Toyota", 1600000); 
+
+        System.out.println("Initial Map: " + carPrices);
+
+        System.out.println("Price of Honda: " + carPrices.get("Honda"));
+
+        carPrices.remove("BMW");
+        System.out.println("Map after removing BMW: " + carPrices);
+
+        System.out.println("Does map contain key Honda? " + carPrices.containsKey("Honda"));
+        System.out.println("Does map contain value 1600000? " + carPrices.containsValue(1600000));
+
+        System.out.println("Car Brands: " + carPrices.keySet());
+        System.out.println("Car Prices: " + carPrices.values());
+        System.out.println("Entries in the map: " + carPrices.entrySet());
+
+        System.out.println("Size of the map: " + carPrices.size());
+
+        carPrices.clear();
+        System.out.println("Map after clearing: " + carPrices);
+    }
+}
