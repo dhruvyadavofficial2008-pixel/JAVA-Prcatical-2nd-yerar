@@ -1,0 +1,42 @@
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
+public class pra4b {
+    public static void main(String[] args) {
+
+        System.out.println("--- Demonstrating Set Interface ---");
+
+        Set<String> carBrands = new HashSet<>();
+
+        carBrands.add("Toyota");
+        carBrands.add("Honda");
+        carBrands.add("BMW");
+        carBrands.add("Toyota"); 
+
+        System.out.println("Initial Set: " + carBrands);
+
+        carBrands.remove("Honda");
+        System.out.println("Set after removing Honda: " + carBrands);
+
+        System.out.println("Does set contain BMW? " + carBrands.contains("BMW"));
+        System.out.println("Size of the set: " + carBrands.size());
+        System.out.println("Is the set empty? " + carBrands.isEmpty());
+
+        System.out.print("Car Brands: ");
+        Iterator<String> iterator = carBrands.iterator();
+        while (iterator.hasNext()) {
+            System.out.print(iterator.next() + " ");
+        }
+        System.out.println();
+
+        Set<String> moreCars = new HashSet<>();
+        moreCars.add("Tesla");
+        moreCars.add("Audi");
+        moreCars.add("BMW"); 
+
+        carBrands.addAll(moreCars);
+
+        System.out.println("Set after adding more car brands: " + carBrands);
+    }
+}
