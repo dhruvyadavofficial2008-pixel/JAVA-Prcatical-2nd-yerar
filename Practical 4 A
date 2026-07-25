@@ -1,0 +1,33 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class JAVApractical4 {
+    public static void main(String[] args) {
+
+        List<String> cars = new ArrayList<>();
+
+        cars.add("Toyota");
+        cars.add("Honda");
+        cars.add("BMW");
+        cars.add("Tesla");
+
+        System.out.println("Original List: " + cars);
+
+        System.out.println("Car at index 2: " + cars.get(2));
+
+        cars.set(1, "Mercedes");
+        System.out.println("After Updating: " + cars);
+
+        cars.remove("Tesla");
+        System.out.println("After Removing: " + cars);
+
+        System.out.println("Number of Cars: " + cars.size());
+
+        System.out.println("Contains Toyota? " + cars.contains("Toyota"));
+
+        System.out.println("Car List:");
+        for (String car : cars) {
+            System.out.println(car);
+        }
+    }
+}
