@@ -1,0 +1,180 @@
+import javax.swing.*;
+import javax.swing.border.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class JAVApractical5 extends JFrame implements ActionListener {
+
+    JTextField nameField, dobField, emailField, phoneField;
+    JTextArea addressArea, summaryArea;
+    JRadioButton male, female, other;
+    ButtonGroup genderGroup;
+    JComboBox<String> educationBox;
+    JCheckBox javaSkill, pythonSkill, cppSkill, jsSkill, csharpSkill, sqlSkill, linuxSkill, gitSkill;
+    JButton submitButton, clearButton;
+    Color darkBlue = new Color(18, 52, 86), lightBlue = new Color(230, 240, 255);
+
+    public JAVApractical5() {
+        setTitle("My Resume (S123)");
+        setSize(700, 760);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JPanel mainPanel = new JPanel(new GridBagLayout());
+        mainPanel.setBackground(lightBlue);
+        mainPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(8, 8, 8, 8);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        JLabel title = new JLabel("MY RESUME", SwingConstants.CENTER);
+        title.setFont(new Font("Arial", Font.BOLD, 28));
+        title.setForeground(Color.WHITE);
+        JPanel titlePanel = new JPanel();
+        titlePanel.setBackground(darkBlue);
+        titlePanel.setBorder(new EmptyBorder(15, 10, 15, 10));
+        titlePanel.add(title);
+        gbc.gridx = 0; gbc.gridy = 0; gbc.gridwidth = 2;
+        mainPanel.add(titlePanel, gbc);
+        gbc.gridwidth = 1;
+
+        nameField = addRow(mainPanel, gbc, "Full Name :", new JTextField(20));
+
+        gbc.gridx = 0; gbc.gridy++;
+        mainPanel.add(boldLabel("Gender :"), gbc);
+        gbc.gridx = 1;
+        JPanel genderPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        genderPanel.setBackground(lightBlue);
+        male = new JRadioButton("Male"); female = new JRadioButton("Female"); other = new JRadioButton("Other");
+        genderGroup = new ButtonGroup();
+        for (JRadioButton rb : new JRadioButton[]{male, female, other}) {
+            rb.setBackground(lightBlue); genderGroup.add(rb); genderPanel.add(rb);
+        }
+        mainPanel.add(genderPanel, gbc);
+
+        dobField = addRow(mainPanel, gbc, "Date of Birth :", new JTextField());
+        emailField = addRow(mainPanel, gbc, "Email :", new JTextField());
+        phoneField = addRow(mainPanel, gbc, "Phone Number :", new JTextField());
+
+        gbc.gridx = 0; gbc.gridy++;
+        mainPanel.add(boldLabel("Address :"), gbc);
+        gbc.gridx = 1;
+        addressArea = new JTextArea(4, 20);
+        addressArea.setLineWrap(true); addressArea.setWrapStyleWord(true);
+        mainPanel.add(new JScrollPane(addressArea), gbc);
+
+        gbc.gridx = 0; gbc.gridy++;
+        mainPanel.add(boldLabel("Education :"), gbc);
+        gbc.gridx = 1;
+        String[] education = {"Select", "SSC", "HSC", "Diploma", "B.Sc Computer Science", "BCA", "B.Tech", "MCA", "M.Sc"};
+        educationBox = new JComboBox<>(education);
+        educationBox.setFont(new Font("Arial", Font.PLAIN, 14));
+        mainPanel.add(educationBox, gbc);
+
+        gbc.gridx = 0; gbc.gridy++;
+        mainPanel.add(boldLabel("Skills :"), gbc);
+        gbc.gridx = 1;
+        JPanel skillPanel = new JPanel(new GridLayout(2, 4, 10, 5));
+        skillPanel.setBackground(lightBlue);
+        javaSkill = new JCheckBox("Java"); pythonSkill = new JCheckBox("Python"); cppSkill = new JCheckBox("C++"); jsSkill = new JCheckBox("JavaScript");
+        csharpSkill = new JCheckBox("C#"); sqlSkill = new JCheckBox("SQL"); linuxSkill = new JCheckBox("Linux"); gitSkill = new JCheckBox("Git/GitHub");
+        for (JCheckBox cb : new JCheckBox[]{javaSkill, pythonSkill, cppSkill, jsSkill, csharpSkill, sqlSkill, linuxSkill, gitSkill}) {
+            cb.setBackground(lightBlue); skillPanel.add(cb);
+        }
+        mainPanel.add(skillPanel, gbc);
+
+        gbc.gridx = 0; gbc.gridy++;
+        mainPanel.add(boldLabel("Career Objective :"), gbc);
+        gbc.gridx = 1;
+        summaryArea = new JTextArea(5, 20);
+        summaryArea.setLineWrap(true); summaryArea.setWrapStyleWord(true);
+        mainPanel.add(new JScrollPane(summaryArea), gbc);
+
+        gbc.gridx = 0; gbc.gridy++; gbc.gridwidth = 2;
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(lightBlue);
+        submitButton = new JButton("Submit");
+        clearButton = new JButton("Clear");
+        for (JButton b : new JButton[]{submitButton, clearButton}) {
+            b.setFont(new Font("Arial", Font.BOLD, 15)); b.addActionListener(this);
+        }
+        submitButton.setBackground(darkBlue); submitButton.setForeground(Color.WHITE);
+        clearButton.setBackground(Color.GRAY); clearButton.setForeground(Color.WHITE);
+        buttonPanel.add(submitButton);
+        buttonPanel.add(Box.createHorizontalStrut(20));
+        buttonPanel.add(clearButton);
+        mainPanel.add(buttonPanel, gbc);
+
+        add(mainPanel);
+        setVisible(true);
+    }
+
+    private JLabel boldLabel(String text) {
+        JLabel l = new JLabel(text);
+        l.setFont(new Font("Arial", Font.BOLD, 15));
+        return l;
+    }
+
+    private <T extends JTextField> T addRow(JPanel panel, GridBagConstraints gbc, String labelText, T field) {
+        gbc.gridx = 0; gbc.gridy++;
+        panel.add(boldLabel(labelText), gbc);
+        gbc.gridx = 1;
+        panel.add(field, gbc);
+        return field;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == submitButton) {
+            if (nameField.getText().trim().isEmpty() || dobField.getText().trim().isEmpty()
+                    || emailField.getText().trim().isEmpty() || phoneField.getText().trim().isEmpty()
+                    || addressArea.getText().trim().isEmpty() || summaryArea.getText().trim().isEmpty()
+                    || educationBox.getSelectedIndex() == 0) {
+                JOptionPane.showMessageDialog(this, "Please fill all the fields.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            String gender = male.isSelected() ? "Male" : female.isSelected() ? "Female" : other.isSelected() ? "Other" : "Not Selected";
+
+            StringBuilder skills = new StringBuilder();
+            if (javaSkill.isSelected()) skills.append("Java, ");
+            if (pythonSkill.isSelected()) skills.append("Python, ");
+            if (cppSkill.isSelected()) skills.append("C++, ");
+            if (jsSkill.isSelected()) skills.append("JavaScript, ");
+            if (csharpSkill.isSelected()) skills.append("C#, ");
+            if (sqlSkill.isSelected()) skills.append("SQL, ");
+            if (linuxSkill.isSelected()) skills.append("Linux, ");
+            if (gitSkill.isSelected()) skills.append("Git/GitHub, ");
+            String skillText = skills.length() > 0 ? skills.substring(0, skills.length() - 2) : "No Skills Selected";
+
+            String resume = "========== STUDENT RESUME ==========\n\n"
+                    + "Name : " + nameField.getText()
+                    + "\n\nGender : " + gender
+                    + "\n\nDate of Birth : " + dobField.getText()
+                    + "\n\nEmail : " + emailField.getText()
+                    + "\n\nPhone : " + phoneField.getText()
+                    + "\n\nAddress :\n" + addressArea.getText()
+                    + "\n\nEducation : " + educationBox.getSelectedItem()
+                    + "\n\nSkills : " + skillText
+                    + "\n\nCareer Objective :\n" + summaryArea.getText()
+                    + "\n\n===================================";
+
+            JOptionPane.showMessageDialog(this, resume, "Resume Preview", JOptionPane.INFORMATION_MESSAGE);
+
+        } else if (e.getSource() == clearButton) {
+            nameField.setText(""); dobField.setText(""); emailField.setText(""); phoneField.setText("");
+            addressArea.setText(""); summaryArea.setText("");
+            genderGroup.clearSelection();
+            educationBox.setSelectedIndex(0);
+            javaSkill.setSelected(false); pythonSkill.setSelected(false); cppSkill.setSelected(false); jsSkill.setSelected(false);
+            csharpSkill.setSelected(false); sqlSkill.setSelected(false); linuxSkill.setSelected(false); gitSkill.setSelected(false);
+            nameField.requestFocus();
+            JOptionPane.showMessageDialog(this, "Form Cleared Successfully!");
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(JAVApractical5::new);
+    }
+}
