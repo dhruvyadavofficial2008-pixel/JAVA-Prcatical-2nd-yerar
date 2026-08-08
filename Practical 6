@@ -1,0 +1,54 @@
+import org.json.JSONObject;
+
+public class pra6 {
+
+    // Student class
+    static class Student {
+        String name;
+        int rollNo;
+        String course;
+
+        Student(String name, int rollNo, String course) {
+            this.name = name;
+            this.rollNo = rollNo;
+            this.course = course;
+        }
+    }
+
+    public static void main(String[] args) {
+
+        // Create Java object
+        Student student = new Student("Dhruv", 123, "B.Sc. Computer Science");
+
+        // ---------------- ENCODING ----------------
+        // Java Object -> JSON
+        JSONObject jsonObject = new JSONObject();
+
+        jsonObject.put("name", student.name);
+        jsonObject.put("rollNo", student.rollNo);
+        jsonObject.put("course", student.course);
+
+        System.out.println("===== ENCODING =====");
+        System.out.println("Java Object converted into JSON:");
+        System.out.println(jsonObject.toString(4));
+
+        // ---------------- DECODING ----------------
+        // JSON -> Java Object
+        String jsonString = jsonObject.toString();
+
+        JSONObject decodedJson = new JSONObject(jsonString);
+
+        String name = decodedJson.getString("name");
+        int rollNo = decodedJson.getInt("rollNo");
+        String course = decodedJson.getString("course");
+
+        Student decodedStudent =
+                new Student(name, rollNo, course);
+
+        System.out.println("\n===== DECODING =====");
+        System.out.println("JSON converted back into Java Object:");
+        System.out.println("Name   : " + decodedStudent.name);
+        System.out.println("Roll No: " + decodedStudent.rollNo);
+        System.out.println("Course : " + decodedStudent.course);
+    }
+}
